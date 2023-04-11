@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>My Cool Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body class="dark-theme">
+    <header class="mainHeader">
+      <a ref="#" class="logo unvisible2">LOGO</a>
+      <ul>
+        <button class="theme" id="themeButton">
+          <svg id="themeIcon" style="width: 18px; height: 25px;"><use xlink:href="icons/icons.svg#lightbulb" width="25"></use></svg>
+        </button>
+      </ul>
+    </header>
+    <div style="height: 15%;">
+    </div>
+    <canvas id="canvas1" class="unvisible2" style="height:100%; width:100%;"></canvas>
+    <div id="topDiv">
+      <div style="z-index: 1; pointer-events: none;">
+      </div>
+    </div>
+    <div class="bottomHeader">
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
