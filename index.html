@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simon Aufgabenverteiler</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="error" class="error">
+        <p id="error-message">Test Error</p>
+    </div>
+    <div class="container">
+      <h2>Generieren von: </h2>
+      <input type="date" id="input_date_start">
+      bis
+      <input type="date" id="input_date">
+      <button class="buttonBlue" onclick="Generate()">Generieren</button>
+    </div>
+    <div class="container">
+        <h2 style="padding-right: 10px">Namen: </h2>
+        <div id="keywords_mainNames"></div>
+        <input type="text" id="input_mainNames">
+        <button class="buttonBlue" onclick="addName('mainNames')">Name Hinzufügen</button>
+    </div>
+    <table id="data-table"></table>
+    <div class="container">
+      <h2 style="padding-right: 10px">Kantoren Namen: </h2>
+      <div id="keywords_mainNamesKantoren"></div>
+      <input type="text" id="input_mainNamesKantoren">
+      <button class="buttonBlue" onclick="addName('mainNamesKantoren')">Name Hinzufügen</button>
+    </div>
+    <table id="data-tableKantoren"></table>
+    <script src="main.js"></script>
+  </body>
+</html>
