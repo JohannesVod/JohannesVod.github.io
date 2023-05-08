@@ -218,16 +218,19 @@ function SetCellOccupationKantoren(i, value){
 }
 
 var cell_occupations = getCookie("CellOccupations");
-// cell_occupations = null;
+//cell_occupations = null;
 if (cell_occupations == null){
-    cell_occupations = "0000000000000000000000000000000000000000000000000";
+    cell_occupations = "1111111111111111111111111111111111111111111111111";
+    // 1111111111111111111111111111111111111111111111111
     setCookie("CellOccupations", cell_occupations, 10000000);
 }
 
 var cell_occupationsKantoren = getCookie("CellOccupationsKantoren");
-// cell_occupationsKantoren = null;
+//cell_occupationsKantoren = null;
 if (cell_occupationsKantoren == null){
-    cell_occupationsKantoren = "000000000000000000000";
+    cell_occupationsKantoren = "111111111111111111111";
+    // 000000000000000000000
+    // 111111111111111111111
     setCookie("CellOccupationsKantoren", cell_occupationsKantoren, 10000000);
 }
 
@@ -386,6 +389,11 @@ function DistributeTasks(){
     names_normal = removeEmptyStrings(names_normal);
     names_kantoren = removeEmptyStrings(names_kantoren);
 
+    if (names_normal.length <= 2 || names_kantoren.length <= 2){
+        showError("Bitte alle Namen angeben!");
+        return null;
+    }
+
     const loadout_1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const loadout_2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -399,6 +407,12 @@ function DistributeTasks(){
         21, 22, 23, 24, 25, 26, 27
     ];
 
+    remapping2 = [
+        0, 1, 2, 3, 4, 5, 6,
+        0, 1, 2, 3, 4, 5, 6,
+        0, 1, 2, 3, 4, 5, 6
+    ];
+
     for (let index = 0; index < cell_occupations.length; index++) {
         const element = cell_occupations[index];
         loadout_1[remapping1[index]] += parseInt(element);
@@ -406,7 +420,7 @@ function DistributeTasks(){
 
     for (let index = 0; index < cell_occupationsKantoren.length; index++) {
         const element = cell_occupationsKantoren[index];
-        loadout_2[index] += parseInt(element);
+        loadout_2[remapping2[index]] += parseInt(element);
     }
 
     const assignment = AssignSlotsRandomly(loadout_1, names_normal);
@@ -427,7 +441,7 @@ function DistributeTasks(){
     }
 
     for (let index = 0; index < tasks_with_names_2.length; index++) {
-        const remap = index;
+        const remap = remapping2[index];
         for (let ind = 0; ind < parseInt(cell_occupationsKantoren[index]); ind++) {
             const worker = assignment2[remap][used_cells2[remap]];
             tasks_with_names_2[index].push(worker);
