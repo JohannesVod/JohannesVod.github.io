@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="light-theme">
+    <header>
+        <h1>Jakob Bormann</h1>
+        <nav>
+            <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <img class="skeleton" alt="Profile Picture" id="profile-picture" width="250" height="250">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hi, my name is Jakob Bormann and I'm a construction worker based in Munich. I have been working in the construction industry for over 10 years and have experience in a wide range of projects, from residential homes to large commercial buildings. I take pride in my work and always strive to deliver high-quality results that meet or exceed my clients' expectations.</p>
+            <p>In my free time, I enjoy spending time with my family and friends, exploring the outdoors, and working on DIY projects around the house. I'm also passionate about giving back to my community and regularly volunteer at local organizations.</p>
+        </section>
+        <section id="projects">
+            <h2>My Projects</h2>
+            <ul>
+            <li>
+                <h3>Residential Home</h3>
+                <p>I worked on the construction of a beautiful residential home in the suburbs of Munich. The project involved building a two-story house with four bedrooms, three bathrooms, and a spacious open-plan living area. I was responsible for overseeing the framing and roofing work, as well as coordinating with other tradespeople to ensure that the project was completed on time and within budget.</p>
+            </li>
+            <li>
+                <h3>Commercial Building</h3>
+                <p>I was part of the team that built a large commercial building in the heart of Munich. The project involved constructing a six-story office building with retail space on the ground floor. I was responsible for managing the concrete and steel work, as well as ensuring that all safety regulations were followed during the construction process.</p>
+            </li>
+            <li>
+                <h3>Community Center</h3>
+                <p>I had the opportunity to work on the construction of a new community center in a disadvantaged neighborhood in Munich. The project involved building a multi-purpose facility that included a gymnasium, meeting rooms, and a daycare center. I was responsible for coordinating with local organizations and community leaders to ensure that the center met the needs of the residents.</p>
+            </li>
+            </ul>
+        </section>
+      
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form action="submit-form.php" method="post">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message"></textarea><br><br>
+            <input type="submit" value="Submit">
+            </form> 
+        </section>
+        </main>
+        <footer>
+        Copyright © Jakob Bormann
+        </footer>
+    </body>
+    <script type="module" src="index.js"></script>
+</html>
