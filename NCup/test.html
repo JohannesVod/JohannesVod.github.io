@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+@import 'https://fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&subset=latin-ext';
+body {
+  background-color: whitesmoke;
+  font-family: 'Work Sans', sans-serif;
+}
+
+pre{
+  font-size: 15px;
+}
+
+.reaction{
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+}
+
+.team-logo-tuple {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+}
+  
+.team-logo-tuple img {
+  border-radius: 5px;
+  width: 45px;
+  height: 45px;
+  margin-right: 20px;
+}
+
+.team-logo-tuple .team-name2 {
+  font-size: 20px;
+}
+
+#add-team-form {
+  margin-bottom: 20px;
+}
+  
+#add-team-form label {
+  display: inline-block;
+  width: 150px;
+}
+
+.coolInputField, 
+#add-team-form input[type="text"],
+#add-team-form input[type="url"] {
+  font-size: 20px;
+  width: 300px;
+  background-color: #ffffff;
+  border: 0;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+}
+
+.group-stats {
+  border-top: solid 1.5px;
+  border-color: rgb(216, 216, 216);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 30px;
+  align-items: center; /* Add this line */
+}
+
+.team-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+  width: 140px;
+  font-size: 13px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.stats div {
+  margin-right: 10px;
+}
+
+.statsEl {
+  width: 16px;
+  text-align: right;
+}
+
+.columnGroups{
+  min-width: 325px;
+  padding: 2px;
+  margin: 2px;
+  background-color: white;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+}
+
+.statsH {
+  font-size: smaller;
+  color: rgb(84, 84, 84);
+}
+
+.match-outer{
+  position: relative;
+  margin: 2px;
+  cursor: pointer;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 250px;
+  min-width: 160px;
+  min-height: 130px;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.match {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  overflow: visible;
+  z-index: 10;
+}
+
+.spieldauer {
+  font-size: 12px;
+  color: gray;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  width: 33.333%;
+  height: 40px;
+  overflow: visible;
+}
+
+.group-stats img,
+.team img {
+  border-radius: 3px;
+  width: 25px;
+  height: 25px;
+}
+.score {
+  font-size: 20px;
+  width: 33.333%;
+  text-align: center;
+}
+.team span {
+  word-wrap:break-word;
+  text-align: center;
+  max-width: 65px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.match {
+    position: relative; 
+}
+
+.active-bar {
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  width: 130px;
+  background-color: green;
+  z-index: 10;
+  animation: active-bar-animation 2s ease-in-out infinite alternate;
+}
+
+
+@keyframes active-bar-animation {
+    0% { left: calc(-131px);}
+    100% { left: calc(101%);}
+}
+
+:root {
+  --linewidth: 4px;
+  --curve-radius: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 23px;
+}
+
+.centered-top-right {
+  left: 50%;
+  border-left: 0px;
+  bottom: 15%;
+  border-bottom: 0px;
+  border-top-right-radius: var(--curve-radius);
+  height: 35%;
+}
+
+.centered-bott-right {
+  left: 50%;
+  border-left: 0px;
+  bottom: 50%;
+  border-top: 0px;
+  border-bottom-right-radius: var(--curve-radius);
+  height: 35%;
+}
+
+.centered-top-left {
+  left: 0%;
+  border-right: 0px;
+  bottom: 40%;
+  border-bottom: 0px;
+  border-top-left-radius: var(--curve-radius);
+  height: 10%;
+}
+
+.centered-bott-left {
+  left: 0%;
+  border-right: 0px;
+  bottom: 50%;
+  border-top: 0px;
+  border-bottom-left-radius: var(--curve-radius);
+  height: 10%;
+}
+
+
+.centered {
+  position: absolute;  
+  border-style: solid;
+  border-color: rgb(185, 185, 185);
+  width: 50%;
+  z-index: 1;
+}
+
+.cell {
+  width: 100%;
+  height: 200px;
+  background-color: green;
+  position: relative;
+  z-index: 1;
+}
+
+.column{
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+.columnOuter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+}
+
+.columnOuter2 {
+  flex-basis: 50%;
+  width: 100%;
+}
+
+.testE{
+  width: 100%;
+  flex-basis: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.innerTestE{
+  width: 150px;
+  z-index: 4;
+}
+
+.tablediv{
+  width: 100%;
+  max-width: 1330px;
+  display: flex;
+}
+
+.tablediv2{
+  width: 100%;
+  max-width: 1330px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.match-result{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.numGoals{
+  font-size: 24px;
+  background-color: whitesmoke;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom: 2.5px solid rgb(215, 215, 215);
+}
+
+.standartBtn{
+  width: 90px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #ffffff;
+  overflow: hidden;
+  z-index: 10;
+  border: 0;
+  box-shadow: 0 2.5px 0 0 #e5e5e5;
+}
+
+@keyframes glow {
+    0% { background-color: transparent;}
+    50% { background-color: rgb(67, 127, 67);}
+    100% { background-color: transparent;}
+}
+
+
+.updated {
+  animation: glow 1.5s ease-in-out 1 alternate;
+}
+
+@media (max-width: 800px) {
+  .testE {
+    flex-basis: 50%;
+  }
+  .tablediv{
+    flex-direction: column;
+  }
+  .centered{
+    display: none;
+  }
+}
+</style>
+
+</head>
+<body>
+<div class="adminRights2" style="display: none;">
+  <div style="display: flex; gap: 10px; padding-bottom: 10px;">
+    <button class="standartBtn" id="databaseBtn">Load to database</button>
+    <button class="standartBtn" id="reloadBtn">Init Database</button>
+    <input class="coolInputField" style="width: 100px" type="text" id="numGroups" value="4, 4, 5, 4"></input>
+  </div>
+</div>
+
+<div class="tablediv" style="padding-bottom: 100px;">
+  <div class="columnOuter">
+    <div class="title">Viertelfinale</div>
+    <div class="column">
+      <div class="testE" id="match_0">
+        <div class="innerTestE"></div>
+        <div class="centered centered-top-right"></div>
+      </div>
+      <div class="testE" id="match_1">
+        <div class="innerTestE"></div>
+        <div class="centered centered-bott-right"></div>
+      </div>
+      <div class="testE" id="match_2">
+        <div class="innerTestE"></div>
+        <div class="centered centered-top-right"></div>
+      </div>
+      <div class="testE" id="match_3">
+        <div class="innerTestE"></div>
+        <div class="centered centered-bott-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="columnOuter">
+    <div class="title">Halbfinale</div>
+    <div class="column">
+      <div class="testE" id="match_4">
+        <div class="innerTestE"></div>
+        <div class="centered centered-bott-left"></div>
+        <div class="centered centered-top-left"></div>
+        <div class="centered centered-top-right"></div>
+      </div>
+      <div class="testE" id="match_5">
+        <div class="innerTestE"></div>
+        <div class="centered centered-bott-left"></div>
+        <div class="centered centered-top-left"></div>
+        <div class="centered centered-bott-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="columnOuter">
+    <div class="title">Finale</div>
+    <div class="column">
+      <div class="testE"  id="match_6">
+        <div class="innerTestE"></div>
+        <div class="centered centered-bott-left"></div>
+        <div class="centered centered-top-left"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="tablediv2" id="groups" style="padding-bottom: 20px;">
+</div>
+
+<div class="adminRights2" style="display: none;">
+  <form id="add-team-form">
+    <label for="team-name">Team Name:</label>
+    <input type="text" id="team-name" name="team-name" required>
+    <br><br>
+    <label for="team-logo-url">Team Logo URL:</label>
+    <input type="text" id="team-logo-url" name="team-logo-url" required>
+    <br><br>
+    <input class="standartBtn" type="submit" value="Add Team">
+  </form>
+  <div class="" id="team-logos">
+  </div>
+</div>
+
+<div style="width: 100%; text-align: center; display:flex; align-items:center; flex-direction: column;">
+  <h1>Reaktionen</h1>
+  <form id="AddReactionForm" class="reaction" style="display: flex; flex-direction: column; padding: 10px; gap:5px">
+    <span>Deine Reaktion!</span>
+    <input class="coolInputField" style="background-color: whitesmoke; " type="text" id="ReactionTextInpt" placeholder="Text" required></input>
+    <input class="coolInputField" style="background-color: whitesmoke; " type="text" id="ReactionNameInpt" placeholder="Name" required></input>
+    <input class="standartBtn" style="width: auto;" type="submit" value="Hinzufügen">
+  </form>
+</div>
+
+<div class="tablediv2" id="reactions" style="padding-bottom: 20px;">
+</div>
+
+<template id="reaction">
+  <div class="reaction">
+    <pre class="reactionSymbol" id="reactionSymbol"></pre>
+    <pre id="reactionName"></pre>
+  </div>
+</template>
+
+<template id="team-logos-template">
+  <div class="team-logo-tuple">
+    <button id="deleteBTN" class="standartBtn" style="margin-right: 10px; background-color: red; color: white; font-weight: 600;">DELETE</button>
+    <img src="https://via.placeholder.com/100" alt="Team Logo">
+    <span class="team-name2">Team Name</span>
+  </div>
+</template>
+
+<template id="match-template">
+  <div class="match-outer">
+    <div style="width:90%; padding-bottom:8px; display: flex; justify-content: space-between;">
+      <div class="spieldauer"><span>Start: </span><span id="startSpan">20:23</span>
+        <input class="adminRights" style="width: 16px; display: none;" type="datetime-local" id="startTime">
+      </div>
+      <div class="spieldauer"><span>Dauer: </span><span id="durationSpan" class="adminRights"></span><span>min</span></div>
+    </div>
+    
+    <div class="match">
+      <div class="team">
+        <img id="team1_logo" src="./images/placeholder.png" alt="Team 1 Logo">
+        <span class="adminRights" id="team_1_span"></span>
+      </div>
+      <div class="score">
+          <div class="match-result">
+              <div class="numGoals adminRights">
+                
+              </div>
+              <div class="numGoals adminRights">
+                
+              </div>
+          </div>
+          <div style="font-size: 14px;"><span id="currentMinute"></span> <span style="color: orange;" id="currentMinuteExtra"></span></div>
+          <div class="adminRights" style="text-align: center; display: none;">
+            <input type="checkbox" id="is_ended" name="is_ended" value="Bike">
+            <label for="is_ended" style="font-size: 11px;"> beendet? </label>
+          </div>
+      </div>
+      <div class="team">
+        <img id="team2_logo" src="./images/placeholder.png" alt="Team 2 Logo">
+        <span class="adminRights" id="team_2_span"></span>
+      </div>
+    </div>
+    <div class="active-bar" id="greenBar" style="display: none;"></div>
+  </div>
+</template>
+
+<template id="group-stats-top">
+  <div class="group-stats" style="border-top: none;">
+    <div class="statsEl statsH">Mannschaft</div>
+    <div class="stats">
+      <div class="statsEl statsH">Pkte</div>
+      <div class="statsEl statsH">S</div>
+      <div class="statsEl statsH">U</div>
+      <div class="statsEl statsH">N</div>
+      <div class="statsEl statsH">T</div>
+      <div class="statsEl statsH">GT</div>
+      <div class="statsEl statsH">TD</div>
+    </div>
+  </div>
+</template>
+
+<template id="group-stats-template">
+  <div class="group-stats">
+    <div class="team-name" >
+      <img id="team_logo" src="./images/placeholder.png" alt="Team 1 Logo">
+      <span id="team_name" style="padding-left: 4px;">Osnabrück</span>
+    </div>
+    <div class="stats">
+      <div class="statsEl" id="pkte">0</div>
+      <div class="statsEl" id="S">0</div>
+      <div class="statsEl" id="U">0</div>
+      <div class="statsEl" id="N">0</div>
+      <div class="statsEl" id="T">0</div>
+      <div class="statsEl" id="GT">0</div>
+      <div class="statsEl" id="TD">0</div>
+    </div>
+  </div>
+</template>
+
+<form id="loginform" style="display: flex; gap: 10px;">
+  <!-- <input class="coolInputField" style="width: 100px" type="text" id="email" placeholder="email" required></input> -->
+  <input class="coolInputField" style="width: 100px;" type="text" id="password" placeholder="password" required></input>
+  <input class="standartBtn" style="width: auto;  " type="submit" value="Get Admin Rights">
+  <input id="logoutBtn" style="display: none;" class="standartBtn" type="button" value="Logout">
+</form>
+<span id="emailLoginName"></span>
+<script src="script.js" type="module"></script>
+
+</body>
+</html>

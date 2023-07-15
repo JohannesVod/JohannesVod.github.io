@@ -1,0 +1,71 @@
+Meltdown
+In Meltdown, the attacker can read the value of any address by changing the state of the cache by exploiting out-of-order execution. The attack consists of 3 phases
+
+First Phase: The attacker loads the address he wants to read into a register. Normally, the entire kernel is mapped in the virtual address space of every user process, so the process can try to access it, even if it raises an exception. However, during the exception may execute subsequent instructions because of out-of-order execution. 
+
+Second Phase: The attacker process allocates a “probe array” of size 256×4096 bytes and ensures that no part of this array is cached. The array therefore consists of 256 pages, which correspond to the possible values a single byte can take. The value that the attacker wants to read is then used to access the corresponding page of the probe array. If the byte has value 16 for example, then the 16’th page of the probe array is loaded into the cache
+
+Third Phase: In a different thread the attacker uses techniques such as Flush+Reload to translate the state of the cache back to the value of the desired address. For this, one can simply iterate through every page of the probe array and measure the access time. If the access time of the k’th page is really short, we know that the byte originally had value k. 
+
+
+<div class="match">
+        <div class="team">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Logo_FC_Bayern_M%C3%BCnchen_%282002%E2%80%932017%29.svg/1200px-Logo_FC_Bayern_M%C3%BCnchen_%282002%E2%80%932017%29.svg.png" alt="Team 1 Logo">
+            <span>Team 1</span>
+        </div>
+        <div class="score">2 - 1</div>
+        <div class="team">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/PSG_FC_logo.jpg" alt="Team 2 Logo">
+            <span>Very long team name</span>
+        </div>
+    </div>
+
+
+    <table>
+  <tr>
+    <td>quarter finals</td>
+    <td>half finals</td> 
+    <td>final</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="cell">team 1 vs team 2</div>
+      <div class="centered centered-top-right"></div>
+    </td>
+    <td rowspan="2">
+      <div class="cell">team 2 vs team 4</div>
+      <div class="centered centered-top-left"></div>
+      <div class="centered centered-bott-left"></div>
+      <div class="centered centered-top-right"></div>
+    </td> 
+    <td rowspan="4">
+      <div class="cell">team 2 vs team 6</div>
+      <div class="centered centered-top-left"></div>
+      <div class="centered centered-bott-left"></div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="cell">team 3 vs team 4</div>
+      <div class="centered centered-bott-right"></div>
+    </td> 
+  </tr>
+  <tr>
+    <td>
+      <div class="cell">team 5 vs team 6</div>
+      <div class="centered centered-top-right"></div>
+    </td> 
+    <td rowspan="2">
+      <div class="cell">team 6 vs team 8</div>
+      <div class="centered centered-top-left"></div>
+      <div class="centered centered-bott-left"></div>
+      <div class="centered centered-bott-right"></div>
+    </td> 
+  </tr>
+  <tr>
+    <td>
+      <div class="cell">team 7 vs team 8</div>
+      <div class="centered centered-bott-right"></div>
+    </td> 
+  </tr>
+</table>
