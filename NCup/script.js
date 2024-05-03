@@ -29,7 +29,7 @@ login.addEventListener('submit', (event) => {
   event.preventDefault();
   try{
     // const mailAddr = document.getElementById('email').value;
-    const mailAddr = "ncupadmin@gmail.com";
+    const mailAddr = "ncupadmin2@gmail.com";
     const password = document.getElementById('password').value;
     signInWithEmailAndPassword(auth, mailAddr, password)
       .then((userCredential) => {
